@@ -85,7 +85,7 @@ async def show_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Função principal para iniciar o bot
 def main():
-    application = ApplicationBuilder().token('7405856221:AAFgT_kM9bfzAF8aOVk1PBf3vge3YcLK8pY').build()
+    application = ApplicationBuilder().token('SEU_BOT_TOKEN').build()
 
     # Comandos
     application.add_handler(CommandHandler("start", start))
