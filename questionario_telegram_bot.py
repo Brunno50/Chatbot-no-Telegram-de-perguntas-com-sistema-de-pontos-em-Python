@@ -50,7 +50,7 @@ async def handle_response(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if user_answer == correct_answer:
         user_scores[chat_id] += 1
-        await update.message.reply_text("Você tem ganhou + 1 ponto!")
+        await update.message.reply_text("Você tem um ponto!")
     else:
         await update.message.reply_text("Você errou!")
 
@@ -71,21 +71,22 @@ async def show_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = query.message.chat.id
 
     score = user_scores.get(chat_id, 0)
+    total_questions = len(questions)
     
     # Mensagem de resultado
-    if score == len(questions):
+    if score == total_questions:
         await query.answer()
-        await query.message.reply_text("Parabéns, você acertou todas as perguntas!")
+        await query.message.reply_text(f"Parabéns, você acertou todas as perguntas! Seu total de pontos é {score}.")
     elif score == 1:
         await query.answer()
-        await query.message.reply_text("Você fez somente um ponto.")
+        await query.message.reply_text(f"Você fez somente um ponto. Seu total de pontos é {score}.")
     else:
         await query.answer()
-        await query.message.reply_text(f"Você fez {score} pontos.")
+        await query.message.reply_text(f"Você fez {score} pontos de {total_questions}. Tente melhorar da próxima vez!")
 
 # Função principal para iniciar o bot
 def main():
-    application = ApplicationBuilder().token('SEU_BOT_TOKEN').build()
+    application = ApplicationBuilder().token('YOUR_BOT_TOKEN').build()
 
     # Comandos
     application.add_handler(CommandHandler("start", start))
